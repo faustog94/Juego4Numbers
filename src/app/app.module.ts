@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 
 // NG Bootstrap :)
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AdivinarModule } from './modules/adivinar/adivinar.module';
+import { HomeModule } from './modules/home/home.module';
 
 
 @NgModule({
@@ -15,6 +17,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AdivinarModule,
+    HomeModule,
     NgbModule
   ],
   providers: [],

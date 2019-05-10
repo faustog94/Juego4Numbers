@@ -1,0 +1,25 @@
+<div class="container-fluid" id="fullcontainer">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="mensaje-bienvenida text-center">
+        ¡Bienvenido!
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <h2>¿Estás listo para jugar?</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <p class="texto">Elegí uno de los dos modos</p>
+      <button type="button" class="btn btn-secondary mr-2" placement="bottom" ngbTooltip="{{ mensajeAdivinar }}" [routerLink]="['/adivinar']" routerLinkActive="router-link-active" >
+        Adivinar
+      </button>
+      <button type="button" class="btn btn-secondary mr-2" placement="bottom" ngbTooltip="{{ mensajeProponer }}" [routerLink]="['/proponer']" routerLinkActive="router-link-active" >
+        Retar al PC
+      </button>
+    </div>
+  </div>
+</div>
