@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 /* Componentes y Routing */
 import { AdivinarRoutingModule } from './adivinar-routing.module';
 import { AdivinarComponent } from './components/adivinar/adivinar.component';
@@ -19,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdivinarRoutingModule,
     ReactiveFormsModule,
     NgbModalModule,
-    NgbAlertModule
+    NgbAlertModule,
   ]
 })
 export class AdivinarModule { }

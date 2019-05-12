@@ -33,21 +33,33 @@ export function ValidadorNumeros(control: AbstractControl) {
  * Devuelve los dígitos de un número, en un array.
  * @param num Número del cual se quieren obtener los dígitos.
  */
-export function getDigitos(num: number): number[] {
-    const digitos = [];
-    while (num > 0) {
-        digitos[digitos.length] = num % 10; // Retorna el resto de dividir por 10.
-        num = parseInt( (num / 10).toString(), 10 ) ; // Le quito una cifra
-    }
-    digitos.reverse(); // Reordeno el array para que me muestre los digitos bien.
-    return digitos;
+export function getDigitos(str: string): number[] {
+   const digitos =  Array.from(str);
+   let digitosN = [];
+   for (const digito of digitos) {
+       digitosN.push(parseInt(digito, 10));
+   }
+   return digitosN;
   }
+/**
+ * Convierte el array con digitos que recibe, a un numero entero.
+ * @param digits array con digitos
+ */
+export function digitsToNumber(digits): number {
+    let numero = '';
+    let i;
+    // tslint:disable-next-line: forin
+    for (i in digits) {
+        numero += digits[i];
+    }
+    return parseInt(numero, 10);
+}
 /**
  * Devuelve true si encuentra elementos repetidos en el arreglo que recibe como argumento.
  * @param array Array con elementos simples (no objetos) del cual se quiere
  * buscar elementos repetidos.
  */
-function hayRepetidos(array): boolean {
+export function hayRepetidos(array): boolean {
     const digitos = array;
     for (let index = 0; index < digitos.length; index++) {
         const element = digitos[index];

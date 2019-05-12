@@ -5,7 +5,7 @@
         <form [formGroup]="form" class="col-sm-12">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Ingresa un número</label>
-                  <input type="text" class="form-control form-control-lg"  name="numero" type="text" formControlName="numeroingresado" placeholder="Ingresa un número de 4 dígitos">
+                  <input type="text" required class="form-control form-control-lg"  name="numero" type="text" formControlName="numeroingresado" placeholder="Ingresa un número de 4 dígitos">
                   <small class="form-text text-muted">Tiene que tener 4 dígitos distintos.</small>
                 </div>
           <ngb-alert [dismissible]="false" [type]="'danger'" *ngIf="form.getError('numerosRepetidos') && form.get('numeroingresado').touched">No puedes enviar números con dígitos repetidos</ngb-alert>
@@ -13,7 +13,7 @@
           <ngb-alert [dismissible]="false" [type]="'danger'" *ngIf="form.get('numeroingresado').errors && form.get('numeroingresado').touched">Debes ingresar un número de 4 dígitos</ngb-alert>
           <div class="row">
             <div class="text-center col-sm-12">
-                <button [disabled]="!form.valid" class="btn btn-outline-primary" type="submit" onsubmit="onSubmit()">Enviar</button>
+                <button [disabled]="form.pristine || !form.valid" class="btn btn-outline-primary" type="submit" (click)="enviar()">Enviar</button>
             </div>
           </div>
         </form>
