@@ -1,3 +1,33 @@
-<p>
-  proponer works!
-</p>
+<div class="container-fluid" id="wrapper">
+  <div class="content h-100">
+    <div class="row align-items-center justify-content-center h-100">
+      <div class="col-sm-8" id="numberDiv">
+        <div class="row">
+          <div class="col-sm-12">
+            <p class="textoNumero" style="font-size: 30pt; text-align: center">{{ lastNumber.value }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8" id="formDiv">
+        <form [formGroup]="form" class="col-sm-12">
+                <div class="form-group">
+                  <label for="cantidadOrdenadas">Cantidad de cifras correctas y ordenadas</label>
+                  <input type="number" required class="form-control form-control-lg"  name="cantidadOrdenadas" min="0" max="4" formControlName="inputOrdenadas" placeholder="¿Cuantas cifras están bien ordenadas?">
+                  <small class="form-text text-muted">Ingresa un número de 0 a 4.</small>
+                </div>
+                <div class="form-group">
+                  <label for="cantidadDesordenadas">Cantidad de cifras correctas pero desordenadas</label>
+                  <input type="number" required class="form-control form-control-lg"  name="cantidadDesordenadas" min="0" max="4" formControlName="inputDesordenadas" placeholder="¿Cuantas cifras están bien ordenadas?">
+                  <small class="form-text text-muted">Ingresa un número de 0 a 4.</small>
+                </div>
+          <ngb-alert [dismissible]="false" [type]="'danger'" *ngIf="form.getError('cantidadSuperada') && form.touched">Revisa las cantidades ingresadas. La suma de ambas no puede ser mayor que 4!</ngb-alert>
+          <div class="row">
+            <div class="text-center col-sm-12">
+                <button [disabled]="form.pristine || !form.valid" class="btn btn-outline-primary" type="submit" (click)="enviar()">Enviar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

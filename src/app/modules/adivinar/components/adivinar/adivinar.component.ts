@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ValidadorNumeros, getDigitos } from '../../utils/util-numeros';
+import { ValidadorNumeros, getDigitos, compararNumeros } from '../../utils/util-numeros';
 import Swal from 'sweetalert2';
 import { sampleSize } from 'lodash';
 @Component({
@@ -12,15 +12,21 @@ export class AdivinarComponent implements OnInit {
   digitosNumero: any;
   intNumero: string;
   cantidadIntentos = 0;
-  constructor() { }
+  constructor() {}
 
   alertCerrada = false;
-  form = new FormGroup({
-    numeroingresado: new FormControl('', [Validators.minLength(4), Validators.maxLength(4)])
-  }, { validators: ValidadorNumeros });
+  form = new FormGroup(
+    {
+      numeroingresado: new FormControl('', [
+        Validators.minLength(4),
+        Validators.maxLength(4)
+      ])
+    },
+    { validators: ValidadorNumeros }
+  );
   ngOnInit() {
-    this.digitosNumero = sampleSize([0,1,2,3,4,5,6,7,8,9], 4);
-    let numberDisplay = "";
+    this.digitosNumero = sampleSize([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 4);
+    let numberDisplay = '';
     this.digitosNumero.forEach(element => {
       numberDisplay += element;
     });
@@ -32,15 +38,23 @@ export class AdivinarComponent implements OnInit {
     this.cantidadIntentos++;
     const valorIngresado = this.form.get('numeroingresado').value;
     const digitos = getDigitos(valorIngresado);
-    const aciertos = contarCifrasAcertadas(digitos, this.digitosNumero);
-    const correctos = contarCifrasCorrectas(digitos, this.digitosNumero);
-    const desordenadas = aciertos - correctos;
-    if (aciertos === 4) {
-      Swal.fire('¡Felicitaciones, Ganaste!', `El número correcto es  ${this.intNumero}.
-      Realizaste ${ this.cantidadIntentos } intentos hasta lograrlo.`, 'success');
+    const comparacion = compararNumeros(digitos, this.digitosNumero);
+    const desordenadas = comparacion.desordenadas;
+    const correctos = comparacion.ordenadas;
+    if (correctos === 4) {
+      Swal.fire(
+        '¡Felicitaciones, Ganaste!',
+        `El número correcto es  ${this.intNumero}.
+      Realizaste ${this.cantidadIntentos} intentos hasta lograrlo.`,
+        'success'
+      );
     } else {
-      Swal.fire('No acertaste', `Cifras ordenadas: ${correctos} \n.
-      Cifras desordenadas: ${desordenadas}`, 'warning');
+      Swal.fire(
+        'No acertaste',
+        `Cifras ordenadas: ${correctos} \n.
+      Cifras desordenadas: ${desordenadas}`,
+        'warning'
+      );
     }
   }
 }
@@ -60,7 +74,9 @@ function contarCifrasAcertadas(digitos, original) {
   let cantidadCifrasAcertadas = 0;
   for (const digito of digitos) {
     for (const digitooriginal of original) {
-      if (digitooriginal === digito) { cantidadCifrasAcertadas++; }
+      if (digitooriginal === digito) {
+        cantidadCifrasAcertadas++;
+      }
     }
   }
   return cantidadCifrasAcertadas;
